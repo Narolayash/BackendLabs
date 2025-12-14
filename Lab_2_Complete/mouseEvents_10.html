@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse evenet</title>
+</head>
+<!-- 10. Write JavaScript that handles following mouse event. (B)  -->
+<!-- • If mouse left button pressed on browser, it displayed message “Left Clicked”.  -->
+<!-- • If mouse right button pressed on browser, it displayed message “Right Clicked” -->
+<body>
+    <h1 class="detectMS">Your mouse detecting...</h1>
+    <br />
+    <button class="btn">Clicked</button>
+
+    <script>
+        const btnReff = document.querySelector(".btn");
+
+        btnReff.addEventListener("mousedown", (event) => {
+            if(event.button === 0) console.log("Left clicked");
+            if(event.button === 2) console.log("Right clicked");
+        });
+    </script>
+</body>
+</html>
