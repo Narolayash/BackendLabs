@@ -24,5 +24,15 @@
     npm uninstall -g nodemon
 
 -- practice installing multiple packages using package.json
+    npm install
+    
 -- write a detailed note on package .json
+    package.json is the heart of a Node.js project.
+    It is a metadata file that:
+        Describes your project
+        Manages dependencies (libraries)
+        Defines scripts (commands)
+        Stores configuration info
+    📌 Without package.json, npm cannot manage your project properly.
+
 -- List all local packages
