@@ -1,4 +1,5 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const bookRouter = express.Router();
 const { 
     getAllBooks, 
@@ -37,7 +38,37 @@ bookRouter.get('/:id', async (req, res) => {
     }
 });
 
-bookRouter.post('/', async (req, res) => {
+bookRouter.post('/', [
+    body('title')
+        .trim()
+        .notEmpty()
+        .withMessage('Title is required'),
+    body('author')
+        .trim()
+        .notEmpty()
+        .withMessage('Author is required'),
+    body('totalCopies')
+        .isInt({ min: 0 })
+        .withMessage('Total copies must be a positive number'),
+    body('availableCopies')
+        .isInt({ min: 0 })
+        .withMessage('Available copies must be a positive number'),
+    body('isbn')
+        .optional()
+        .trim()
+        .isString()
+        .withMessage('ISBN must be a string'),
+], async (req, res) => {
+    // Check if validation found any errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        // If there are errors, send them back to the user
+        return res.status(400).json({ 
+            success: false, 
+            errors: errors.array() 
+        });
+    }
+
     try {
         const result = await insertBook(req.body);
         res.status(201).json({

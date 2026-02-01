@@ -13,7 +13,7 @@ async function getAllIssues() {
 
         return issues;
     } catch (error) {
-        console.error('Error fetching issues:', err.message);
+        console.error('Error fetching issues:', error.message);
         throw error;
     }
 }
@@ -38,7 +38,7 @@ async function getIssueById(id) {
         }
         return issue;
     } catch (error) {
-        console.log('Error fetching issue by id:', err.message);
+        console.log('Error fetching issue by id:', error.message);
         throw error;
     }
 }
@@ -71,11 +71,18 @@ async function insertIssue(data) {
             throw error;
         }
 
+        if (member.status === 'ACTIVE') {
+            const error = new Error('cannot issue book to inactive member');
+            error.statusCode = 403;
+            throw error;
+        }
+
         if (await Issue.findOne({
             book: bookId,
+            member: memberId,
             status: "ISSUED"
         })) {
-            const error = new Error('book is already issued');
+            const error = new Error('This member has already borrowed this book');
             error.statusCode = 409;
             throw error;
         }
@@ -96,9 +103,9 @@ async function insertIssue(data) {
         await book.save();
 
         return issue;
-    } catch (err) {
-        console.log('Error creation issue', err.message);
-        throw err;
+    } catch (error) {
+        console.log('Error creation issue', error.message);
+        throw error;
     }
 } 
 
@@ -135,9 +142,9 @@ async function returnBook(issueId) {
         }
 
         return issue;
-    } catch (err) {
-        console.log('Error returning book:', err.message);
-        throw err;
+    } catch (error) {
+        console.log('Error returning book:', error.message);
+        throw error;
     }
 }
 
@@ -158,10 +165,18 @@ async function deleteIssueById(id) {
             throw error;
         }
 
+        if (deletedIssue.status === 'ISSUED') {
+            const book = await Book.findById(deletedIssue.book);
+            if (book) {
+                book.availableCopies += 1;
+                await book.save();
+            }
+        }
+
         return deletedIssue;
-    } catch (err) {
-        console.log('Error deleting issue:', err.message);
-        throw err;
+    } catch (error) {
+        console.log('Error deleting issue:', error.message);
+        throw error;
     }
 }
 

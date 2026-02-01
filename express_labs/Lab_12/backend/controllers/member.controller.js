@@ -4,7 +4,7 @@ const Member = require('../models/member.model');
 // GET all member 
 async function getAllMembers() {
     try {
-        const members = await Member.find();
+        const members = await Member.find().sort({ createdAt: -1 });
         return members;
     } catch (err) {
         console.error('Error fetching members:', err.message);
@@ -23,7 +23,7 @@ async function getMemberById(id) {
 
         const member = await Member.findById(id);
         if (!member) {
-            const error = new Error('memeber not found');
+            const error = new Error('member not found');
             error.statusCode = 404;
             throw error;
         }
@@ -54,7 +54,7 @@ async function insertMember(data) {
 async function updateMemberInfo(id, data) {
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            const error = new Error('invaild member id');
+            const error = new Error('invalid member id');
             error.statusCode = 400;
             throw error;
         }
@@ -81,7 +81,7 @@ async function updateMemberInfo(id, data) {
 async function deleteMemberById(id) {
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            const error = new Error('invaild member id');
+            const error = new Error('invalid member id');
             error.statusCode = 400;
             throw error;
         }

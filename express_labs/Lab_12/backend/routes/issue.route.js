@@ -1,11 +1,12 @@
 const express = require('express');
+const issueRouter = express.Router();
 const { 
     getAllIssues, 
     getIssueById, 
     insertIssue, 
     returnBook, 
     deleteIssueById } = require('../controllers/issue.controller');
-const issueRouter = express.Router();
+
 
 issueRouter.get('/', async (req, res) => {
     try {
@@ -16,7 +17,7 @@ issueRouter.get('/', async (req, res) => {
         });
     } catch (err) {
         res.status(err.statusCode || 500).json({
-            error: err.message || 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     }
 });
@@ -30,7 +31,7 @@ issueRouter.get('/:id', async (req, res) => {
         });
     } catch (err) {
         res.status(err.statusCode || 500).json({
-            error: err.message || 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     }
 });
@@ -44,7 +45,7 @@ issueRouter.post('/', async (req, res) => {
         });
     } catch (err) {
         res.status(err.statusCode || 500).json({
-            error: err.message || 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     }
 });
@@ -58,7 +59,7 @@ issueRouter.patch('/:id/return', async (req, res) => {
         });
     } catch (err) {
         res.status(err.statusCode || 500).json({
-            error: err.message || 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     }
 });
@@ -72,7 +73,7 @@ issueRouter.delete('/:id', async (req, res) => {
         });
     } catch (err) {
         res.status(err.statusCode || 500).json({
-            error: err.message || 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     }
 });

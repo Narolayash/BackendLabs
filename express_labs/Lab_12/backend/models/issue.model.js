@@ -23,4 +23,7 @@ const issueSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+issueSchema.index({ book: 1, status: 1 });
+issueSchema.index({ member: 1, status: 1 });
+
 module.exports = mongoose.model("Issue", issueSchema);

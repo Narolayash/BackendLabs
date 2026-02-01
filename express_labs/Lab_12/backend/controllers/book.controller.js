@@ -54,7 +54,7 @@ async function insertBook(data) {
 async function updateBookInfo(id, data) {
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            const error = new Error('invaild book id');
+            const error = new Error('invalid book id');
             error.statusCode = 400;
             throw error;
         }
@@ -81,7 +81,7 @@ async function updateBookInfo(id, data) {
 async function deleteById(id) {
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            const error = new Error('invaild book id');
+            const error = new Error('invalid book id');
             error.statusCode = 400;
             throw error;
         }

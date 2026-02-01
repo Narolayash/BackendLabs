@@ -21,6 +21,9 @@ const memberSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+memberSchema.index({ email: 1 });
+memberSchema.index({ rollNo: 1 });
+
 module.exports = mongoose.model("Member", memberSchema);
 
 // req.body --demo
