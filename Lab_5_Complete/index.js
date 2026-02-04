@@ -54,7 +54,7 @@ const child_process = require('child_process');
 // const myUrl = "https://www.example.com:8080/search?query=test&category=web"
 // console.log(url.parse(myUrl)); // query string na form ma return krse
 // console.log(url.parse(myUrl, true)); // query ni object na form ma return krse
- 
+
 // -- 2 --
 // const myUrl = "https://www.example.com:8080/search?query=test&category=web"
 // const parsed = url.parse(myUrl, true);
