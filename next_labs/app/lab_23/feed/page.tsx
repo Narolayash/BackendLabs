@@ -12,17 +12,20 @@ type faculty = {
 function Lab_23_Page() {
     return (
         <>
-        <div className='d-flex p-3 gap-3'>
-            {facuties.map((faculty: faculty) => (
-                <Card 
-                    key={faculty.id}
-                    id={faculty.id} 
-                    title={faculty.name} 
-                    description={faculty.qualification} 
-                    imageUrl={faculty.img}
-                />
-            ))}
-        </div>
+            <div className='d-flex p-3 gap-3'>
+                {
+                    facuties.map((faculty: faculty) => (
+                        <Card 
+                            key={faculty.id}
+                            id={faculty.id} 
+                            title={faculty.name} 
+                            description={faculty.qualification} 
+                            imageUrl={faculty.img}
+                            href={'/lab_23/photo/' + faculty.id}
+                        />
+                    ))
+                }
+            </div>
         </>
     )
 }

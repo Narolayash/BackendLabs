@@ -7,9 +7,10 @@ type CardProps = {
     title: string;
     description: string;
     imageUrl: string;
+    href?: string;
 };
 
-const Card: React.FC<CardProps> = ({ id,  title, description, imageUrl }) => {
+const Card: React.FC<CardProps> = ({ id,  title, description, imageUrl, href }) => {
     return (
         <div className={styles.card}>
             <div className={styles.imageWrapper}>
@@ -25,8 +26,8 @@ const Card: React.FC<CardProps> = ({ id,  title, description, imageUrl }) => {
             <div className={styles.body}>
                 <h3 className={styles.title}>{title}</h3>
                 <p className={styles.text}>{description}</p>
-                <Link href={'/lab_23/photo/' + id}>
-                    <button className={styles.button}>Read More</button>
+                <Link href={href ?? '/lab_23/photo/' + id} className={styles.button}>
+                    Read More
                 </Link>
             </div>
         </div>

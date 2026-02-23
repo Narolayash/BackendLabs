@@ -1,9 +1,7 @@
 import React from 'react'
 
 function Yash() {
-    return (
-        <div>Yash</div>
-    )
+    return null;
 }
 
 export default Yash

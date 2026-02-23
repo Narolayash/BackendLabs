@@ -1,4 +1,4 @@
-import data from "@/app/Data//ArrayOfObjects.json"
+import data from "@/Data/ArrayOfObjects.json"
 import Link from "next/link";
 
 export default async function UserTable({ params } : { params : Promise<{ pageNo : string }> }) {
